@@ -26,4 +26,9 @@ RUN pecl install xdebug \
     && echo "xdebug.remote_connect_back=1"  >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
     && echo "xdebug.remote_port=9000"       >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
 
+RUN RM /usr/local/etc/php-fpm.d/www.conf
+COPY ./www.conf /usr/local/etc/php-fpm.d
+
+WORKDIR /project
+
 CMD ["php-fpm"]
